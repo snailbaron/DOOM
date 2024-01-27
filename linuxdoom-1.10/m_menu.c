@@ -22,7 +22,7 @@
 //
 //-----------------------------------------------------------------------------
 
-static const char
+[[maybe_unused]] static const char
 rcsid[] = "$Id: m_menu.c,v 1.7 1997/02/03 22:45:10 b1 Exp $";
 
 #include <unistd.h>
@@ -73,15 +73,15 @@ extern boolean		chat_on;		// in heads-up code
 //
 // defaulted values
 //
-int			mouseSensitivity;       // has default
+intptr_t		mouseSensitivity;       // has default
 
 // Show messages has default, 0 = off, 1 = on
-int			showMessages;
+intptr_t		showMessages;
 	
 
 // Blocky mode, has default, 0 = high, 1 = normal
-int			detailLevel;		
-int			screenblocks;		// has default
+intptr_t		detailLevel;		
+intptr_t		screenblocks;		// has default
 
 // temp for screenblocks (0-9)
 int			screenSize;		
@@ -511,7 +511,7 @@ menu_t  SaveDef =
 void M_ReadSaveStrings(void)
 {
     int             handle;
-    int             count;
+    [[maybe_unused]] int count;
     int             i;
     char    name[256];
 	
@@ -738,7 +738,7 @@ void M_QuickLoad(void)
 	M_StartMessage(QSAVESPOT,NULL,false);
 	return;
     }
-    sprintf(tempstring,QLPROMPT,savegamestrings[quickSaveSlot]);
+    snprintf(tempstring, sizeof(tempstring), QLPROMPT, savegamestrings[quickSaveSlot]);
     M_StartMessage(tempstring,M_QuickLoadResponse,true);
 }
 

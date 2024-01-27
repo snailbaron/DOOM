@@ -32,6 +32,8 @@
 // Needed because we are refering to patches.
 #include "r_data.h"
 
+#include <stdint.h>
+
 //
 // VIDEO
 //
@@ -49,7 +51,7 @@ extern	byte*		screens[5];
 extern  int	dirtybox[4];
 
 extern	byte	gammatable[5][256];
-extern	int	usegamma;
+extern intptr_t usegamma;
 
 
 

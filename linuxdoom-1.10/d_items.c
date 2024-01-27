@@ -20,7 +20,7 @@
 //
 //-----------------------------------------------------------------------------
 
-static const char
+[[maybe_unused]] static const char
 rcsid[] = "$Id:$";
 
 // We are referring to sprite numbers.

@@ -21,7 +21,7 @@
 //-----------------------------------------------------------------------------
 
 
-static const char
+[[maybe_unused]] static const char
 rcsid[] = "$Id: g_game.c,v 1.8 1997/02/03 22:45:09 b1 Exp $";
 
 #include <string.h>
@@ -145,26 +145,26 @@ byte*		savebuffer;
 // 
 // controls (have defaults) 
 // 
-int             key_right;
-int		key_left;
+intptr_t        key_right;
+intptr_t	key_left;
 
-int		key_up;
-int		key_down; 
-int             key_strafeleft;
-int		key_straferight; 
-int             key_fire;
-int		key_use;
-int		key_strafe;
-int		key_speed; 
+intptr_t	key_up;
+intptr_t	key_down; 
+intptr_t        key_strafeleft;
+intptr_t	key_straferight; 
+intptr_t        key_fire;
+intptr_t	key_use;
+intptr_t	key_strafe;
+intptr_t	key_speed; 
  
-int             mousebfire; 
-int             mousebstrafe; 
-int             mousebforward; 
+intptr_t        mousebfire; 
+intptr_t        mousebstrafe; 
+intptr_t        mousebforward; 
  
-int             joybfire; 
-int             joybstrafe; 
-int             joybuse; 
-int             joybspeed; 
+intptr_t        joybfire; 
+intptr_t        joybstrafe; 
+intptr_t        joybuse; 
+intptr_t        joybspeed; 
  
  
  
@@ -456,8 +456,8 @@ void G_DoLoadLevel (void)
     // DOOM determines the sky texture to be used
     // depending on the current episode, and the game version.
     if ( (gamemode == commercial)
-	 || ( gamemode == pack_tnt )
-	 || ( gamemode == pack_plut ) )
+	 || ( (int)gamemode == (int)pack_tnt )
+	 || ( (int)gamemode == (int)pack_plut ) )
     {
 	skytexture = R_TextureNumForName ("SKY3");
 	if (gamemap < 12)
@@ -492,8 +492,8 @@ void G_DoLoadLevel (void)
     joyxmove = joyymove = 0; 
     mousex = mousey = 0; 
     sendpause = sendsave = paused = false; 
-    memset (mousebuttons, 0, sizeof(mousebuttons)); 
-    memset (joybuttons, 0, sizeof(joybuttons)); 
+    memset (mousebuttons, 0, sizeof(mousearray)); 
+    memset (joybuttons, 0, sizeof(joyarray)); 
 } 
  
  
@@ -760,7 +760,7 @@ void G_Ticker (void)
 //
 void G_InitPlayer (int player) 
 { 
-    player_t*	p; 
+    [[maybe_unused]] player_t*	p; 
  
     // set up the saved info         
     p = &players[player]; 
@@ -1200,6 +1200,7 @@ void G_LoadGame (char* name)
 
 void G_DoLoadGame (void) 
 { 
+    [[maybe_unused]]
     int		length; 
     int		i; 
     int		a,b,c; 
@@ -1213,7 +1214,7 @@ void G_DoLoadGame (void)
     // skip the description field 
     memset (vcheck,0,sizeof(vcheck)); 
     sprintf (vcheck,"version %i",VERSION); 
-    if (strcmp (save_p, vcheck)) 
+    if (strcmp ((char*)save_p, vcheck)) 
 	return;				// bad version 
     save_p += VERSIONSIZE; 
 			 

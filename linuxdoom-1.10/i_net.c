@@ -20,7 +20,7 @@
 //
 //-----------------------------------------------------------------------------
 
-static const char
+[[maybe_unused]] static const char
 rcsid[] = "$Id: m_bbox.c,v 1.1 1997/02/03 22:45:10 b1 Exp $";
 
 #include <stdlib.h>
@@ -168,7 +168,7 @@ void PacketGet (void)
 				
     fromlen = sizeof(fromaddress);
     c = recvfrom (insocket, &sw, sizeof(sw), 0
-		  , (struct sockaddr *)&fromaddress, &fromlen );
+		  , (struct sockaddr *)&fromaddress, (socklen_t*)&fromlen );
     if (c == -1 )
     {
 	if (errno != EWOULDBLOCK)

@@ -22,7 +22,7 @@
 //-----------------------------------------------------------------------------
 
 
-static const char
+[[maybe_unused]] static const char
 rcsid[] = "$Id: w_wad.c,v 1.5 1997/02/03 16:47:57 b1 Exp $";
 
 
@@ -290,25 +290,25 @@ void W_Reload (void)
 //  does override all earlier ones.
 //
 void W_InitMultipleFiles (char** filenames)
-{	
+{
     int		size;
-    
+
     // open all the files, load headers, and count lumps
     numlumps = 0;
 
     // will be realloced as lumps are added
-    lumpinfo = malloc(1);	
+    lumpinfo = malloc(1);
 
     for ( ; *filenames ; filenames++)
 	W_AddFile (*filenames);
 
     if (!numlumps)
 	I_Error ("W_InitFiles: no files found");
-    
+
     // set up caching
     size = numlumps * sizeof(*lumpcache);
     lumpcache = malloc (size);
-    
+
     if (!lumpcache)
 	I_Error ("Couldn't allocate lumpcache");
 
@@ -477,7 +477,7 @@ W_CacheLumpNum
 ( int		lump,
   int		tag )
 {
-    byte*	ptr;
+    [[maybe_unused]] byte* ptr;
 
     if ((unsigned)lump >= numlumps)
 	I_Error ("W_CacheLumpNum: %i >= numlumps",lump);

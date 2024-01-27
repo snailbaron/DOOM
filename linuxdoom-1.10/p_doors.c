@@ -20,7 +20,7 @@
 //
 //-----------------------------------------------------------------------------
 
-static const char
+[[maybe_unused]] static const char
 rcsid[] = "$Id: p_doors.c,v 1.4 1997/02/03 16:47:53 b1 Exp $";
 
 
@@ -356,7 +356,7 @@ EV_VerticalDoor
   mobj_t*	thing )
 {
     player_t*	player;
-    int		secnum;
+    [[maybe_unused]] int secnum;
     sector_t*	sec;
     vldoor_t*	door;
     int		side;

@@ -24,7 +24,7 @@
 //
 //-----------------------------------------------------------------------------
 
-static const char
+[[maybe_unused]] static const char
 rcsid[] = "$Id: m_misc.c,v 1.6 1997/02/03 22:45:10 b1 Exp $";
 
 #include <sys/stat.h>
@@ -166,51 +166,51 @@ M_ReadFile
 //
 // DEFAULTS
 //
-int		usemouse;
-int		usejoystick;
+intptr_t	usemouse;
+intptr_t	usejoystick;
 
-extern int	key_right;
-extern int	key_left;
-extern int	key_up;
-extern int	key_down;
+extern intptr_t	key_right;
+extern intptr_t	key_left;
+extern intptr_t	key_up;
+extern intptr_t	key_down;
 
-extern int	key_strafeleft;
-extern int	key_straferight;
+extern intptr_t	key_strafeleft;
+extern intptr_t	key_straferight;
 
-extern int	key_fire;
-extern int	key_use;
-extern int	key_strafe;
-extern int	key_speed;
+extern intptr_t	key_fire;
+extern intptr_t	key_use;
+extern intptr_t	key_strafe;
+extern intptr_t	key_speed;
 
-extern int	mousebfire;
-extern int	mousebstrafe;
-extern int	mousebforward;
+extern intptr_t	mousebfire;
+extern intptr_t	mousebstrafe;
+extern intptr_t	mousebforward;
 
-extern int	joybfire;
-extern int	joybstrafe;
-extern int	joybuse;
-extern int	joybspeed;
+extern intptr_t	joybfire;
+extern intptr_t	joybstrafe;
+extern intptr_t	joybuse;
+extern intptr_t	joybspeed;
 
 extern int	viewwidth;
 extern int	viewheight;
 
-extern int	mouseSensitivity;
-extern int	showMessages;
+extern intptr_t	mouseSensitivity;
+extern intptr_t	showMessages;
 
-extern int	detailLevel;
+extern intptr_t	detailLevel;
 
-extern int	screenblocks;
+extern intptr_t	screenblocks;
 
-extern int	showMessages;
+extern intptr_t	showMessages;
 
 // machine-independent sound params
-extern	int	numChannels;
+extern intptr_t	numChannels;
 
 
 // UNIX hack, to be removed.
 #ifdef SNDSERV
 extern char*	sndserver_filename;
-extern int	mb_used;
+extern intptr_t	mb_used;
 #endif
 
 #ifdef LINUX
@@ -225,8 +225,8 @@ extern char*	chat_macros[];
 typedef struct
 {
     char*	name;
-    int*	location;
-    int		defaultvalue;
+    intptr_t*	location;
+    intptr_t    defaultvalue;
     int		scantranslate;		// PC scan code hack
     int		untranslated;		// lousy hack
 } default_t;
@@ -254,15 +254,15 @@ default_t	defaults[] =
 
 // UNIX hack, to be removed. 
 #ifdef SNDSERV
-    {"sndserver", (int *) &sndserver_filename, (int) "sndserver"},
+    {"sndserver", (intptr_t *) &sndserver_filename, (intptr_t) "sndserver"},
     {"mb_used", &mb_used, 2},
 #endif
     
 #endif
 
 #ifdef LINUX
-    {"mousedev", (int*)&mousedev, (int)"/dev/ttyS0"},
-    {"mousetype", (int*)&mousetype, (int)"microsoft"},
+    {"mousedev", (intptr_t*)&mousedev, (intptr_t)"/dev/ttyS0"},
+    {"mousetype", (intptr_t*)&mousetype, (intptr_t)"microsoft"},
 #endif
 
     {"use_mouse",&usemouse, 1},
@@ -285,16 +285,16 @@ default_t	defaults[] =
 
     {"usegamma",&usegamma, 0},
 
-    {"chatmacro0", (int *) &chat_macros[0], (int) HUSTR_CHATMACRO0 },
-    {"chatmacro1", (int *) &chat_macros[1], (int) HUSTR_CHATMACRO1 },
-    {"chatmacro2", (int *) &chat_macros[2], (int) HUSTR_CHATMACRO2 },
-    {"chatmacro3", (int *) &chat_macros[3], (int) HUSTR_CHATMACRO3 },
-    {"chatmacro4", (int *) &chat_macros[4], (int) HUSTR_CHATMACRO4 },
-    {"chatmacro5", (int *) &chat_macros[5], (int) HUSTR_CHATMACRO5 },
-    {"chatmacro6", (int *) &chat_macros[6], (int) HUSTR_CHATMACRO6 },
-    {"chatmacro7", (int *) &chat_macros[7], (int) HUSTR_CHATMACRO7 },
-    {"chatmacro8", (int *) &chat_macros[8], (int) HUSTR_CHATMACRO8 },
-    {"chatmacro9", (int *) &chat_macros[9], (int) HUSTR_CHATMACRO9 }
+    {"chatmacro0", (intptr_t *) &chat_macros[0], (intptr_t) HUSTR_CHATMACRO0 },
+    {"chatmacro1", (intptr_t *) &chat_macros[1], (intptr_t) HUSTR_CHATMACRO1 },
+    {"chatmacro2", (intptr_t *) &chat_macros[2], (intptr_t) HUSTR_CHATMACRO2 },
+    {"chatmacro3", (intptr_t *) &chat_macros[3], (intptr_t) HUSTR_CHATMACRO3 },
+    {"chatmacro4", (intptr_t *) &chat_macros[4], (intptr_t) HUSTR_CHATMACRO4 },
+    {"chatmacro5", (intptr_t *) &chat_macros[5], (intptr_t) HUSTR_CHATMACRO5 },
+    {"chatmacro6", (intptr_t *) &chat_macros[6], (intptr_t) HUSTR_CHATMACRO6 },
+    {"chatmacro7", (intptr_t *) &chat_macros[7], (intptr_t) HUSTR_CHATMACRO7 },
+    {"chatmacro8", (intptr_t *) &chat_macros[8], (intptr_t) HUSTR_CHATMACRO8 },
+    {"chatmacro9", (intptr_t *) &chat_macros[9], (intptr_t) HUSTR_CHATMACRO9 }
 
 };
 
@@ -392,7 +392,7 @@ void M_LoadDefaults (void)
 			    *defaults[i].location = parm;
 			else
 			    *defaults[i].location =
-				(int) newstring;
+				(intptr_t) newstring;
 			break;
 		    }
 	    }

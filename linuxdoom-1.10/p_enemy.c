@@ -23,7 +23,7 @@
 //
 //-----------------------------------------------------------------------------
 
-static const char
+[[maybe_unused]] static const char
 rcsid[] = "$Id: p_enemy.c,v 1.5 1997/02/03 22:45:11 b1 Exp $";
 
 #include <stdlib.h>
@@ -503,7 +503,7 @@ P_LookForPlayers
     int		c;
     int		stop;
     player_t*	player;
-    sector_t*	sector;
+    [[maybe_unused]] sector_t*	sector;
     angle_t	an;
     fixed_t	dist;
 		
